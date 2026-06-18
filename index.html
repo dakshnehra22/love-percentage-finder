@@ -3,246 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❤️ Love Calculator Pro ❤️</title>
+<title>Virtual Birthday Party 🎂</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#000000,#0f172a,#111827);
-    overflow:hidden;
-}
-
-/* Floating Hearts */
-.hearts span{
-    position:absolute;
-    bottom:-100px;
-    color:#ff4d88;
-    animation:float 10s linear infinite;
-    opacity:.5;
-}
-
-.hearts span:nth-child(1){left:10%;font-size:30px;}
-.hearts span:nth-child(2){left:30%;font-size:45px;animation-duration:12s;}
-.hearts span:nth-child(3){left:50%;font-size:25px;animation-duration:8s;}
-.hearts span:nth-child(4){left:70%;font-size:40px;animation-duration:14s;}
-.hearts span:nth-child(5){left:90%;font-size:35px;animation-duration:9s;}
-
-@keyframes float{
-    from{
-        transform:translateY(100vh);
-    }
-    to{
-        transform:translateY(-120vh);
-    }
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 }
 
 .container{
-    width:90%;
-    max-width:420px;
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:25px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 0 35px rgba(255,0,100,.35);
-}
-
-.logo{
-    font-size:70px;
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    50%{
-        transform:scale(1.15);
-    }
+text-align:center;
+color:white;
+padding:20px;
 }
 
 h1{
-    color:white;
-    margin-bottom:20px;
+font-size:3rem;
+margin-bottom:15px;
 }
 
-input{
-    width:100%;
-    padding:14px;
-    margin:10px 0;
-    border:none;
-    border-radius:12px;
-    outline:none;
-    background:#1f2937;
-    color:white;
-    font-size:16px;
+p{
+font-size:1.2rem;
+margin-bottom:20px;
 }
 
 button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#ff4d88;
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff4f81;
+font-size:18px;
+cursor:pointer;
+font-weight:bold;
+transition:.3s;
 }
 
 button:hover{
-    transform:scale(1.05);
+transform:scale(1.05);
 }
 
-/* Popup */
-
-.popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
+.hidden{
+display:none;
 }
 
-.popup-box{
-    width:320px;
-    background:#111827;
-    padding:30px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 0 40px #ff4d88;
-    animation:show .5s ease;
+.cake{
+font-size:120px;
+margin:20px 0;
+animation:float 2s infinite;
 }
 
-@keyframes show{
-    0%{
-        transform:scale(.3);
-        opacity:0;
-    }
-    100%{
-        transform:scale(1);
-        opacity:1;
-    }
+@keyframes float{
+50%{transform:translateY(-10px);}
 }
 
-.percent{
-    font-size:65px;
-    color:#ff4d88;
-    font-weight:bold;
+.gift{
+font-size:100px;
+cursor:pointer;
 }
 
-.message{
-    color:white;
-    margin-top:10px;
-    font-size:20px;
+.letter{
+background:rgba(255,255,255,.2);
+padding:20px;
+border-radius:20px;
+max-width:600px;
+margin:auto;
+backdrop-filter:blur(5px);
 }
 
-.close-btn{
-    margin-top:20px;
-    padding:10px 20px;
-    border:none;
-    border-radius:10px;
-    background:#ff4d88;
-    color:white;
-    cursor:pointer;
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:white;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-100px) rotate(0deg);
+}
+to{
+transform:translateY(100vh) rotate(360deg);
+}
 }
 </style>
 </head>
 <body>
 
-<div class="hearts">
-    <span>❤️</span>
-    <span>❤️</span>
-    <span>❤️</span>
-    <span>❤️</span>
-    <span>❤️</span>
-</div>
-
 <div class="container">
 
-<div class="logo">❤️</div>
-
-<h1>Love Calculator Pro</h1>
-
-<input type="text" id="name1" placeholder="Enter First Name">
-
-<input type="text" id="name2" placeholder="Enter Second Name">
-
-<button onclick="calculateLove()">
-💘 Calculate Love
-</button>
-
+<div id="page1">
+<h1>🎉 Virtual Birthday Party 🎉</h1>
+<p>Bestie, welcome to our online celebration ❤️</p>
+<button onclick="next1()">Enter Party</button>
 </div>
 
-<div class="popup" id="popup">
-    <div class="popup-box">
-        <div class="percent" id="percent">100%</div>
-        <div class="message" id="message">Soulmate Forever 💍</div>
-        <button class="close-btn" onclick="closePopup()">Close</button>
-    </div>
+<div id="page2" class="hidden">
+<h1>🎂 Birthday Cake</h1>
+<div class="cake">🎂</div>
+<p>Click below to blow the candles!</p>
+<button onclick="next2()">Blow Candles 🕯️</button>
+</div>
+
+<div id="page3" class="hidden">
+<h1>🎊 Yayyy!</h1>
+<p>Candles blown successfully!</p>
+<div class="gift" onclick="next3()">🎁</div>
+<p>Click the gift box</p>
+</div>
+
+<div id="page4" class="hidden">
+<h1>💌 Secret Letter</h1>
+
+<div class="letter">
+<p>
+Dear Bestie ❤️<br><br>
+
+Thank you for always being there.
+Even if we can't celebrate together physically,
+this little website is our virtual birthday party 🎂✨<br><br>
+
+May your life be filled with happiness,
+success and lots of beautiful memories.<br><br>
+
+You are truly special 🌸
+<br><br>
+— Your Best Friend ❤️
+</p>
+</div>
+
+<br>
+<button onclick="next4()">Final Surprise ✨</button>
+</div>
+
+<div id="page5" class="hidden">
+<h1>🥳 Party Complete!</h1>
+<h2>🍰 Virtual Cake Shared Successfully 🍰</h2>
+<br>
+<p>
+Distance doesn't matter when friendship is real ❤️
+</p>
+<br>
+<h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+</div>
+
 </div>
 
 <script>
 
-function calculateLove(){
-
-let n1 = document.getElementById("name1").value.trim().toLowerCase();
-let n2 = document.getElementById("name2").value.trim().toLowerCase();
-
-if(n1==="" || n2===""){
-    alert("Enter both names!");
-    return;
+function next1(){
+document.getElementById("page1").classList.add("hidden");
+document.getElementById("page2").classList.remove("hidden");
+createConfetti();
 }
 
-let percent;
-
-// DAKSH SPECIAL RULE
-if(
-n1==="daksh" ||
-n2==="daksh" ||
-n1==="daksh nehra" ||
-n2==="daksh nehra"
-){
-    percent = 100;
-}
-else{
-    percent = Math.floor(Math.random()*41)+60;
+function next2(){
+document.getElementById("page2").classList.add("hidden");
+document.getElementById("page3").classList.remove("hidden");
 }
 
-let text="";
-
-if(percent===100){
-    text="Soulmate Forever 💍❤️";
-}
-else if(percent>=90){
-    text="Perfect Couple 💖";
-}
-else if(percent>=75){
-    text="Strong Connection ❤️";
-}
-else{
-    text="Good Friendship 😊";
+function next3(){
+document.getElementById("page3").classList.add("hidden");
+document.getElementById("page4").classList.remove("hidden");
 }
 
-document.getElementById("percent").innerHTML = percent + "% ❤️";
-document.getElementById("message").innerHTML = text;
-
-document.getElementById("popup").style.display = "flex";
+function next4(){
+document.getElementById("page4").classList.add("hidden");
+document.getElementById("page5").classList.remove("hidden");
 }
 
-function closePopup(){
-document.getElementById("popup").style.display = "none";
+function createConfetti(){
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.classList.add("confetti");
+c.style.left=Math.random()*100+"vw";
+c.style.animationDuration=(Math.random()*3+2)+"s";
+c.style.opacity=Math.random();
+document.body.appendChild(c);
+}
 }
 
 </script>
