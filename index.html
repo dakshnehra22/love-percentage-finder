@@ -1,68 +1,135 @@
-```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daksh Birthday Party 🎉</title>
+<title>Daksh's Virtual Birthday Party 🎉</title>
 
 <style>
-body{
+*{
 margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#ff6ec4,#7873f5);
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff4d6d,#7b2cbf);
 color:white;
-text-align:center;
 overflow-x:hidden;
+text-align:center;
 }
 
 header{
-padding:40px;
+padding:40px 20px;
 }
 
 h1{
 font-size:3rem;
+margin-bottom:10px;
 }
 
-.party-area{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
+.subtitle{
+font-size:1.2rem;
+opacity:.9;
+}
+
+.party-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
-padding:20px;
+padding:30px;
+max-width:1200px;
+margin:auto;
 }
 
 .card{
 background:rgba(255,255,255,0.15);
-padding:20px;
-border-radius:20px;
-width:220px;
 backdrop-filter:blur(10px);
+border-radius:20px;
+padding:20px;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.03);
 }
 
 .emoji{
-font-size:60px;
+font-size:70px;
+margin-bottom:10px;
 }
 
-button{
-padding:12px 25px;
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:999;
+}
+
+.modal-content{
+background:white;
+color:#333;
+max-width:600px;
+width:100%;
+padding:30px;
+border-radius:25px;
+text-align:center;
+animation:pop .3s ease;
+}
+
+.big-emoji{
+font-size:140px;
+}
+
+.close{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+}
+
+@keyframes pop{
+from{
+transform:scale(.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.final-btn{
+margin:30px;
+padding:15px 30px;
+font-size:18px;
 border:none;
 border-radius:20px;
+background:white;
+color:#7b2cbf;
 cursor:pointer;
-font-size:16px;
-}
-
-#message{
-display:none;
-margin-top:30px;
-font-size:22px;
+font-weight:bold;
 }
 
 .balloon{
 position:fixed;
 bottom:-100px;
 font-size:40px;
-animation:float 10s linear infinite;
+animation:float linear infinite;
+pointer-events:none;
 }
 
 @keyframes float{
@@ -73,74 +140,149 @@ to{
 transform:translateY(-120vh);
 }
 }
+
+#finalMessage{
+display:none;
+padding:50px 20px;
+}
+
+.fireworks{
+font-size:60px;
+animation:flash 1s infinite;
+}
+
+@keyframes flash{
+50%{
+transform:scale(1.2);
+}
+}
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>🎉 Daksh Birthday Party 🎉</h1>
-<p>VIP Guest: My Bestie ❤️</p>
+<h1>🎉 Daksh's Birthday Party 🎉</h1>
+<p class="subtitle">
+VIP Guest: My Bestie ❤️
+</p>
 </header>
 
-<div class="party-area">
+<div class="party-grid">
 
-<div class="card">
+<div class="card" onclick="openModal('🎂','Birthday Cake','Cake officially cut. Bestie already ate 3 slices before everyone arrived 😂🍰')">
 <div class="emoji">🎂</div>
 <h2>Cake</h2>
-<p>Chocolate Birthday Cake</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openModal('🥤','Cold Drinks','2 litres of Coke vanished mysteriously. Suspect: Bestie 😭🥤')">
 <div class="emoji">🥤</div>
 <h2>Cold Drinks</h2>
-<p>Coke • Pepsi • Sprite</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openModal('🍕','Pizza Counter','Last pizza slice caused a civil war ⚔️🍕')">
 <div class="emoji">🍕</div>
 <h2>Pizza</h2>
-<p>Unlimited Pizza Party</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openModal('🍟','Snacks Zone','Scientists confirm fries disappear faster than light 🤣🍟')">
 <div class="emoji">🍟</div>
 <h2>Snacks</h2>
-<p>Fries & Chips</p>
 </div>
 
-<div class="card">
+<div class="card" onclick="openModal('🎁','Gift Box','Congratulations! You unlocked unlimited friendship ❤️🎁')">
 <div class="emoji">🎁</div>
-<h2>Gift Zone</h2>
-<p>Special Surprise</p>
+<h2>Gift Box</h2>
 </div>
 
-<div class="card">
+<div class="card" onclick="openModal('💃','Dance Floor','Skill: 0% | Confidence: 1000% 💀💃')">
 <div class="emoji">💃</div>
 <h2>Dance Floor</h2>
-<p>Party Time</p>
+</div>
+
+<div class="card" onclick="openModal('📸','Selfie Booth','Warning: Too much beauty detected in this photo 📸✨')">
+<div class="emoji">📸</div>
+<h2>Selfie Booth</h2>
+</div>
+
+<div class="card" onclick="openModal('❤️','Special Message','Thank you for joining my virtual birthday party. You make every memory better ❤️')">
+<div class="emoji">❤️</div>
+<h2>Special Message</h2>
 </div>
 
 </div>
 
-<button onclick="showMsg()">🎉 Start Celebration</button>
+<button class="final-btn" onclick="showFinal()">
+🎆 Start Final Celebration
+</button>
 
-<div id="message">
-❤️ Thank you for joining my birthday party bestie ❤️
+<div id="finalMessage">
+<div class="fireworks">
+🎆 🎇 🎆 🎇 🎆
+</div>
+
+<h1>🥳 HAPPY BIRTHDAY DAKSH 🥳</h1>
+
+<p style="font-size:1.3rem;margin-top:20px;">
+Thank you for attending my virtual birthday party ❤️
 <br><br>
-🎂 Cake shared successfully 🍰
+Distance doesn't matter when friendship is real.
+<br><br>
+🍰 Cake Shared Successfully 🍰
+</p>
+
+<div style="font-size:70px;margin-top:30px;">
+🎂 🎉 🎁 ❤️ 🥳
+</div>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+
+<div class="big-emoji" id="mEmoji"></div>
+
+<h2 id="mTitle"></h2>
+
+<p id="mText" style="margin-top:15px;font-size:18px;"></p>
+
+<button class="close" onclick="closeModal()">
+Close
+</button>
+
+</div>
 </div>
 
 <script>
 
-function showMsg(){
-document.getElementById("message").style.display="block";
+function openModal(emoji,title,text){
+document.getElementById("modal").style.display="flex";
+document.getElementById("mEmoji").innerText=emoji;
+document.getElementById("mTitle").innerText=title;
+document.getElementById("mText").innerText=text;
 }
 
-for(let i=0;i<25;i++){
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function showFinal(){
+document.getElementById("finalMessage").style.display="block";
+
+for(let i=0;i<80;i++){
+let e=document.createElement("div");
+e.innerHTML=["🎉","🎊","✨","❤️","🎈"][Math.floor(Math.random()*5)];
+e.style.position="fixed";
+e.style.left=Math.random()*100+"vw";
+e.style.top=Math.random()*100+"vh";
+e.style.fontSize=(20+Math.random()*40)+"px";
+e.style.pointerEvents="none";
+document.body.appendChild(e);
+}
+}
+
+for(let i=0;i<30;i++){
 let b=document.createElement("div");
 b.className="balloon";
-b.innerHTML=["🎈","🎉","✨","🎊"][Math.floor(Math.random()*4)];
+b.innerHTML=["🎈","🎉","✨","❤️"][Math.floor(Math.random()*4)];
 b.style.left=Math.random()*100+"vw";
 b.style.animationDuration=(6+Math.random()*8)+"s";
 document.body.appendChild(b);
@@ -150,4 +292,3 @@ document.body.appendChild(b);
 
 </body>
 </html>
-```
